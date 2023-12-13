@@ -1,0 +1,41 @@
+  // file: searchBar.js
+  .contenitorimg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+
+    .immagine {
+      width: 1000px;
+    }
+  }
+
+  .contenitore {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+
+    .campotesto {
+      margin-right: 3px;
+      width: 300px;
+    }
+
+    .bottone {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+}
+
+// file: index.js
+.colorcount {
+  padding: 10px;
+  background-color: black;
+  width: 10%;
+  border-radius: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}

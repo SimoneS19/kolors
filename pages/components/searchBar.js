@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from '../../styles/Home.module.scss';
+import '../../styles/Home.scss';
 
 function SearchBar({ onSubmit }) {
     const [term, setTerm] = useState('');
@@ -15,21 +15,19 @@ function SearchBar({ onSubmit }) {
 
     return(
         <div>
-            <div className={style.contenitorimg}>
+            <div className="contenitorimg">
                 <img
-                    className={style.img}
+                    className="immagine"
                     src='/images/artl.svg'
                 />
             </div>
             
-            <div className={style.container}>
-                <form onSubmit={handleFormSubmit}>
-                    <input className={style.searchBar} value={term} onChange={handleChange} placeholder="Devi inserire qualcosa"/>
-                    <button className={style.search}>Cerca</button>
+            <form onSubmit={handleFormSubmit} className="contenitore">
+                    <input className="campotesto" value={term} onChange={handleChange} placeholder="Devi inserire qualcosa"/>
+                    <button className="bottone">Cerca</button>
 
                     {/* {term.length < 1 && ' Devi inserire qualcosa'} */}
-                </form>
-        </div>
+            </form>
         </div>
     )
 }

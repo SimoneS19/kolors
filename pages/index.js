@@ -2,7 +2,7 @@ import SearchBar from "./components/searchBar";
 import ColorList from "./components/colorList";
 import apiGtp from "./api/apiGtp";
 import { useState } from "react";
-import style from '../styles/Home.module.scss';
+import '../styles/Home.scss';
 
 export default function App() {
   const [colors, setColors] = useState([])
@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <div>
-      <div className={style.colorcount}>
+      <div className="colorcount">
         RISULTATO RICERCA: {colors.length}
       </div>
       <SearchBar onSubmit={handleSubmit} />
