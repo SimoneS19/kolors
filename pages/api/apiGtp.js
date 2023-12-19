@@ -20,11 +20,9 @@
 import axios from 'axios';
 
 const useGPT = async (term) => {
-  // Eseguire una chiamata per ottenere informazioni sul Pokémon specifico (ad esempio, Pikachu)
   const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`);
     
-  // Estrai il nome e l'URL dell'immagine dal risultato della chiamata
-  const pokemonData = {
+ì  const pokemonData = {
     name: response.data.name,
     image: response.data.sprites.front_default,
   };

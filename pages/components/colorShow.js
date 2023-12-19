@@ -13,16 +13,12 @@
 // export default ColorShow;
 
 
-// Importa la tua funzione useGPT
-import useGPT from '../api/useGPT'; // Assicurati di specificare il percorso corretto
+import useGPT from '../api/useGPT';
 
-// Componente in cui vuoi visualizzare i dati
 function Pokemon({ searchTerm }) {
-  // Chiamata alla funzione useGPT con il termine desiderato (ad esempio, nome di un Pokémon)
   const pokemonData = useGPT(searchTerm);
 
 
-  // Passa i dati del Pokémon al componente ColorShow
   return (
     <div>
       <h2>Dettagli del Pokémon</h2>
