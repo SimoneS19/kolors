@@ -10,16 +10,22 @@ export default function App() {
   const handleSubmit = async (term) => {
     const result = await PokeApi(term);
     setPokemon(result);
-    console.log(`Hai cercato questo colore: ${term}`)
+    console.log(`Hai cercato questo pokemon: ${term}`)
+    console.log(`Ciao`, result);
   };
-
+  console.log(pokemon);
   return (
     <div>
-      <div className="colorcount">
-        RISULTATO RICERCA: {pokemon.length}
-      </div>
+      ciao
+      {/* RISULTATO RICERCA: {pokemon.length} */}
       <SearchBar onSubmit={handleSubmit} />
       <PokemonList pokemonList={pokemon} />
-    </div> 
+      {pokemon ? pokemon.name : null}
+      {pokemon ? (
+        <div>
+          {pokemon.sprites?.front_default}
+        </div>
+      ) : null}
+    </div>
   );
 };

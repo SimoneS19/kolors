@@ -5,7 +5,8 @@ function FpokemonShow({ pokemonShow }) {
         <div>
             {/* <img src={pokemonShow.urls.small} alt={pokemonShow.alt_description} /> */}
             
-            {pokemonShow.name}
+            <img src={pokemonShow.sprites.front_default} alt={pokemonShow.name} />
+            <p>Nome: {pokemonShow.name}</p>
         </div>
     );
 }

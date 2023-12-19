@@ -1,19 +1,13 @@
 import axios from 'axios';
 
-const POKEMON_API = "https://pokeapi.co/api/v2/pokemon";
+const POKEMON_API = "https://pokeapi.co/api/v2/pokemon/";
 
 const PokeApi = async (term) => {
+  const API_URL = `${POKEMON_API}${term ? term : null}`
   // https://pokeapi.co/api/v2/pokemon/{id o nome}/
-  const response = await axios.get(POKEMON_API, {
-    headers: {
-      Authorization: 'Client-ID olZ7p-7hBZ8HKmYRNx0IDKjHY9LkgGVG4qK_Qw1UpOg',
-    },
-    params: {
-      query: 'ditto',
-    }
-  });
+  const response = await axios.get(API_URL);
   
-  return response.results;
+  return response.data;
 };
 
 export default PokeApi;
