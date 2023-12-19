@@ -5,7 +5,7 @@ import '../styles/Home.scss';
 import useGPT from "./api/apiGtp";
 
 export default function App() {
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState([])
 
   const handleSubmit = async (term) => {
     const result = await useGPT(term);
