@@ -1,25 +1,25 @@
-import SearchBar from "./components/searchBar";
-import ColorList from "./components/colorList";
 import { useState } from "react";
+import SearchBar from "./components/searchBar";
+import ColorList from "./components/pokemonList";
+import PokeApi from "./api/pokeApi";
 import '../styles/Home.scss';
-import useGPT from "./api/apiGtp";
 
 export default function App() {
-  const [colors, setColors] = useState([])
+  const [pokemon, setPokemon] = useState([])
 
   const handleSubmit = async (term) => {
-    const result = await useGPT(term);
-    setColors(result);
+    const result = await PokeApi(term);
+    setPokemon(result);
     console.log(`Hai cercato questo colore: ${term}`)
   };
 
   return (
     <div>
       <div className="colorcount">
-        RISULTATO RICERCA: {colors.length}
+        RISULTATO RICERCA: {pokemon.length}
       </div>
       <SearchBar onSubmit={handleSubmit} />
-      <ColorList colorS={colors} />
+      <ColorList pokemonList={pokemon} />
     </div> 
   );
 };
