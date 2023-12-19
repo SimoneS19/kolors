@@ -1,17 +1,19 @@
 import axios from 'axios';
 
+const POKEMON_API = "https://pokeapi.co/api/v2/pokemon";
+
 const PokeApi = async (term) => {
-  const response = await axios.get('https://api.unsplash.com/search/photos', {
+  // https://pokeapi.co/api/v2/pokemon/{id o nome}/
+  const response = await axios.get(POKEMON_API, {
     headers: {
-      Authorization: 'Client-ID 8O50V7bNzfKdVixwS9W9nZVdr0VnrCv9gmeimfdvp6Y',
+      Authorization: 'Client-ID olZ7p-7hBZ8HKmYRNx0IDKjHY9LkgGVG4qK_Qw1UpOg',
     },
     params: {
-      query: term,
-      per_page: 12,
-    },
+      query: 'ditto',
+    }
   });
-
-  return response.data.results;
+  
+  return response.results;
 };
 
 export default PokeApi;

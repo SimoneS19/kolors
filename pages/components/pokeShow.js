@@ -3,9 +3,9 @@
 function FpokemonShow({ pokemonShow }) {
     return (
         <div>
-            <img src={pokemonShow.urls.small} alt={pokemonShow.alt_description} />
+            {/* <img src={pokemonShow.urls.small} alt={pokemonShow.alt_description} /> */}
             
-            {pokemonShow.alt_description}
+            {pokemonShow.name}
         </div>
     );
 }

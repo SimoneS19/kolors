@@ -1,15 +1,15 @@
-import ColorShow from './pokeShow';
+import PokemonShow from './pokeShow';
 
 
 function FpokemonList({ pokemonList }) {
     const renderedPokemon = pokemonList.map((pokemon) => {
-        return <ColorShow key={pokemon.id} pokemonShow={pokemon} />;
+        return <PokemonShow key={pokemon.id} pokemonShow={pokemon} />;
     });
 
     return (
         <div>
             {renderedPokemon}
-            {/* ColorList: {colorS.length} */}
+            {/* pokemonShow: {colorS.length} */}
         </div>
     );
 }

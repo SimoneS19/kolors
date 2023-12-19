@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchBar from "./components/searchBar";
-import ColorList from "./components/pokemonList";
+import PokemonList from "./components/pokemonList";
 import PokeApi from "./api/pokeApi";
 import '../styles/Home.scss';
 
@@ -19,7 +19,7 @@ export default function App() {
         RISULTATO RICERCA: {pokemon.length}
       </div>
       <SearchBar onSubmit={handleSubmit} />
-      <ColorList pokemonList={pokemon} />
+      <PokemonList pokemonList={pokemon} />
     </div> 
   );
 };
