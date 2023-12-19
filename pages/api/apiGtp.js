@@ -22,7 +22,7 @@ import axios from 'axios';
 const useGPT = async (term) => {
   const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`);
     
-ì  const pokemonData = {
+    const pokemonData = {
     name: response.data.name,
     image: response.data.sprites.front_default,
   };
