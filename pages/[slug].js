@@ -1,10 +1,9 @@
 import { useState } from "react";
-import SearchBar from "./components/searchBar";
 import PokemonList from "./components/pokemonList";
 import PokeApi from "./api/pokeApi";
 import '../styles/Home.scss';
 import Link from 'next/link'
-
+import Head from 'next/head';
 
 export default function App() {
   const [pokemon, setPokemon] = useState();
@@ -18,14 +17,16 @@ export default function App() {
 
   return (
     <div>
+      <Head>
+        <title>{pokemon.name}</title>
+      </Head>
       <div className="contenitorimg">
         <img
           className="immagine"
           src='/images/artl.svg'
         />
       </div>
-      {/* RISULTATO RICERCA: {pokemon.length} */}
-      <SearchBar onSubmit={handleSubmit} />
+
       <PokemonList pokemonList={pokemon} />
       
       <div className="card">

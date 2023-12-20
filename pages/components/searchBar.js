@@ -15,13 +15,6 @@ function SearchBar({ onSubmit }) {
 
     return(
         <div>
-            <div className="contenitorimg">
-                <img
-                    className="immagine"
-                    src='/images/artl.svg'
-                />
-            </div>
-            
             <form onSubmit={handleFormSubmit} className="contenitore">
                     <input className="campotesto" value={term} onChange={handleChange} placeholder="Devi inserire qualcosa"/>
                     <button className="bottone">Cerca</button>

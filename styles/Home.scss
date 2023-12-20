@@ -40,3 +40,11 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;       //mettere gli elementi in colonna
+  align-items: center;        //mettere gli elementi al centro
+  margin-top: 5%;
+  justify-content: space-evenly;
+  // border: 5px solid black;
+}

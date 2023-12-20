@@ -1,4 +1,4 @@
-import PokemonShow from './pokeShow';
+import FpokemonShow from './pokeShow';
 
 function FpokemonList({ pokemonList }) {
     if (!Array.isArray(pokemonList)) {
@@ -6,7 +6,16 @@ function FpokemonList({ pokemonList }) {
     }
 
     const renderedPokemon = pokemonList.map((pokemon) => {
-        return <PokemonShow key={pokemon.id} pokemonShow={pokemon} />;
+        return (
+            <div>
+            <h1>Lista dei Pokémon:</h1>
+              <ul>
+                {pokemonData.map(pokemon => (
+                  <li key={pokemon.name}>{pokemon.name}</li>
+                ))}
+              </ul>
+          </div>
+        );
       });
 
     return <div>{renderedPokemon}</div>;
