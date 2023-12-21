@@ -1,22 +1,19 @@
 import FpokemonShow from './pokeShow';
 
 function FpokemonList({ pokemonList }) {
-    if (!Array.isArray(pokemonList)) {
-        return null;
-    }
-
-    const renderedPokemon = pokemonList.map((pokemon) => {
-        return (
-            <div>
-            <h1>Lista dei Pokémon:</h1>
-              <ul>
-                {pokemonData.map(pokemon => (
-                  <li key={pokemon.name}>{pokemon.name}</li>
-                ))}
-              </ul>
+  const renderedPokemon = pokemonList.map((pokemon) => {
+    return (
+      <div>
+        {pokemon ? (
+          <div>
+            <div className="name-poke">{pokemon.name}</div>
+            <img src={pokemon.sprites?.front_default} />
+            <button><Link href={`/${pokemon.name}`}>Pokemon</Link></button>
           </div>
-        );
-      });
+        ) : null}
+      </div>
+    );
+  });
 
     return <div>{renderedPokemon}</div>;
 }
