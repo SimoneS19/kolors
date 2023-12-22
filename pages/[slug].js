@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from 'next/router'
 import { useEffect } from 'react';
 
 import '../styles/Home.scss';
@@ -9,9 +8,8 @@ import Head from 'next/head';
 import axios from 'axios';
 
 
+//gli passiamo props -> il return dell altra funzione
 export default function Single( props ) {
-  console.log('stampo porps', props);
-
   /*
   in pratica questa è una pagina slug, vuol dire che è più o meno tutto uguale o
   simile alla pagina home e quindi cambia di poco
@@ -20,13 +18,6 @@ export default function Single( props ) {
   //creiamo 2 costanti, pokemon sarà effettivamente il pokemon oggetto
   const [pokemon, setPokemon] = useState();
 
-  //ricreiamo tutto il processo per chiamare le api
-
-
-  useEffect(() => {
-    setPokemon(props);
-  }, [props]);
-  
   /*
   utiliziamo useEffect, che in pratica è un gancio che consente di
   gestire ed eseguire alcuni effetti collaterali, tipo:
@@ -36,9 +27,14 @@ export default function Single( props ) {
   (se non ci fosse stato li avrebbe stampati all infinito, poi avrebbe creato bug ed errori) 
   */
 
-  //stampiamo l'oggetto pokemon
-  console.log('Pokemon: ', pokemon);
+  // --> gli passiamo useEffect con props, perchè ogni volta che props si modifica viene rifatto useEffect
+  useEffect(() => {
+    setPokemon(props);
+  }, [props]);
 
+  console.log('Pokemon', props);
+
+  //stampiamo l'oggetto pokemon
   return (
     <div>
       {/* modifichiamo il titolo della pagina con il nome del pokemon cercato */}
@@ -82,6 +78,7 @@ export default function Single( props ) {
 };
 
 
+//dobbiamo ricreare il processo di call api, lo facciamo in una funzione esterna che poi richiamiamo
 export async function getServerSideProps({ query }) {
   console.log('Questo lo sto consolloggando:', query);
   const term = query.slug;
@@ -90,3 +87,5 @@ export async function getServerSideProps({ query }) {
   const response = await axios.get(API_URL);
   return { props: response.data };
 };
+
+//la funzione passa props

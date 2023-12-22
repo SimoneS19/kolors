@@ -1,72 +1,80 @@
 import { useState } from "react";
 
 import SearchBar from "./components/searchBar";
-// import PokemonList from "./components/pokemonList";
 import PokeApi from "./api/pokeApi";
 import '../styles/Home.scss';
 
+import axios from 'axios';
 import Link from 'next/link';
 
+
 //se voglio utilizzare repo devo fare: props.repo -> props = insieme più grande -> repo = sotto insieme di props
+export default function App( props ) {
 
+  /* 1 */
+  console.log('Stampa di props:', props)
 
+  /* 2 */
+  // pokemonList è un array, setPokemonList utilizzato per inserire nuovi elementi nell'array, props.pokemonHome lo mettiamo tra le parentesi di useState perchè dobbiamo settare il valore iniziale dello stato
+  const [pokemonList, setPokemonList] = useState(props.pokemonHome);
 
-export default function App() {
-  //creiamo 2 costanti, pokemon sarà effettivamente il pokemon oggetto
-  const [pokemon, setPokemon] = useState();
-
-  //creiamo una costante che aspetta di ricevere il termine term
+  /* LO SALTA PER FARLO DOPO -> 6 (CALLBACK CON SearcBar) */
+  //ogni volta che viene fatta una ricerca su SearchBar viene fatta una callBack su handleSubmit
   const handleSubmit = async (term) => {
-    //questa costante apetta le api di PokeApi che corrispondono a term
-    const result = await PokeApi(term);
-    setPokemon(result);
+    const result = await PokeApi(term);   //api chimata per la barra di ricerca
+    setPokemonList([result]);   //viene aggiornato il result -> tra [] perchè setPokemonList è un array
   };
 
-  //stampiamo l'oggetto pokemon
-  console.log('Pokemon:', pokemon);
-  
   return (
     <div>
-      {/* il contenitore che contiene l'immagine ArtCode */}
+      {/* immagine artCode */}
       <div className="contenitorimg">
-        <img
-          className="immagine"
-          src='/images/artl.svg'
-        />
+        <img className="immagine" src='/images/artl.svg' />
       </div>
-      {/* RISULTATO RICERCA: {pokemon.length} */}
-
-      {/* la barra di ricerca */}
+      
+      {/* 5 -> BARRA DI RICERCA */}
+      {/* SearchBar che effettua una callBack su handleSubmit */}
       <SearchBar onSubmit={handleSubmit} />
 
-      {/* <PokemonList pokemonList={pokemon} /> */}
-
       <div className="card">
-        <div className="pokemon">
-          {/* chiediamo se pokemon esiste */}
-          {pokemon ? (
-            //se esiste ci stampa la roba seguente:
-            <div>
-              {/* nome del pokemon */}
-              <div className="name-poke">{pokemon.name}</div>
-              {/* immagine del pokemon */}
-              <img src={pokemon.sprites?.front_default} />
-              {/* bottone che porta alla pagina per ogni pokemon */}
-              <button>
-                <Link
-                  href={{
-                    //qua ci indireizza alla pagina che corrisponde al pokemon cercato
-                    pathname: `/${pokemon.name}`
-                  }}
-                >
-                  Pokemon
-                </Link>
-              </button>
-            </div>
-            //se esiste il comento è tutto ok
-          ) : null }
-        </div>
+        {/*
+        Allora, questa mappatura viene fatta perchè noi abbiamo bisogno di ogni singolo
+        elemento di pokemonList (è un array di oggetti), quindi ceh è tipo una mappatura
+        di un insieme più piccolo
+        */}
+
+        {/* 4 -> SPAMPA DEI 12 POKEMON */}{/* 6 -> QUESTA MAPPATURA VIENE CHIAMATA ANCORA CON LA SearchBAr -> PORTA A NUOVA PAGINA -> SLUG */}
+        {pokemonList.map((pokemon) => (
+          <div className="pokemon">
+            {/* nome */}
+            <div className="name-poke">{pokemon.name}</div>
+            {/* immagine */}
+            <img src={pokemon.sprites?.front_default} />
+            {/* pagina per pokemon */}
+            <button>
+              <Link
+                href={{
+                  pathname: `/${pokemon.name}`
+                }}
+              >
+                Pokemon
+              </Link>
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
-};
+}
+
+/* 3 -> TUTTA LA FUNZIONE LA PER COME TERZA */
+// Funzione per ottenere dati durante l'esecuzione del server
+export async function getServerSideProps() {
+  //chiamata api -> con limite 12 -> quindi 12 elementi
+  const API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=12';
+  const response = await axios.get(API_URL);
+  //pendiamo elementi oggetto
+  const pokemonHome = response.data.results;
+  //props.pokemonHome
+  return { props: { pokemonHome } };
+}
