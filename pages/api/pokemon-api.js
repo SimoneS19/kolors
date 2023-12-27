@@ -7,7 +7,9 @@ const PokeApi = async (term) => {
   // https://pokeapi.co/api/v2/pokemon/{id o nome}/
   const response = await axios.get(API_URL);
   
+
   return response.data;
 };
+
 
 export default PokeApi;

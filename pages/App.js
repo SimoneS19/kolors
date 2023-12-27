@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import SearchBar from './components/searchBar';
-import FpokemonList from './components/pokemonList';
-import getPokemon from './api/pokeApi';
+import SearchBar from './components/search-bar';
+import PokemonList from './components/pokemon-list';
+import getPokemon from './api/pokemon-api';
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-      <FpokemonList pokemonList={pokemonList} /> {/* Visualizza la lista di Pokémon */}
+      <PokemonList pokemonList={pokemonList} /> {/* Visualizza la lista di Pokémon */}
       <SearchBar onSubmit={handleSubmit} /> {/* Barra di ricerca */}
     </div>
   );

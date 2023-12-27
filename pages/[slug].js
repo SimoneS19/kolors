@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from 'react';
 
-import '../styles/Home.scss';
+import '../styles/home.scss';
 
 import Link from 'next/link'
 import Head from 'next/head';
@@ -23,7 +23,6 @@ export default function Single( props ) {
   gestire ed eseguire alcuni effetti collaterali, tipo:
       - recupuro dei dati
       - aggiornamento diretto del DOM
-  
   (se non ci fosse stato li avrebbe stampati all infinito, poi avrebbe creato bug ed errori) 
   */
 
@@ -31,8 +30,7 @@ export default function Single( props ) {
   useEffect(() => {
     setPokemon(props);
   }, [props]);
-
-  console.log('Pokemon', props);
+  
 
   //stampiamo l'oggetto pokemon
   return (
@@ -43,30 +41,33 @@ export default function Single( props ) {
       </Head>
 
       {/* il contenitore che contiene l'immagine ArtCode */}
-      <div className="contenitorimg">
-        <img
-          className="immagine"
-          src='/images/mate.png'
-        />
+      <div className="containerLogo">
+        <img className="containerLogo__logo" src='/images/mate.png' />
       </div>
 
       {/* <PokemonList pokemonList={pokemon} /> */}
 
-      <div className="card">
-        <div className="pokemon">
+      <div className="containerCard">
+        <div className="containerCard__pokemon">
           {/* chiediamo se pokemon esiste */}
           {pokemon ? (
             //se lo trova ci stamperà queste cose sotto
             <div>
               {/* nome del pokemon */}
-              <div className="name-poke">{pokemon.name}</div>
+              <div className="containerCard__namePokemon">{pokemon.name}</div>
+              
               <br/>
+              
               {/* immagine del pokemon */}
-              <div className="name-poke">{pokemon.id}</div>
+              <div className="containerCard__namePokemon">{pokemon.id}</div>
+              
               <br/>
+              
               {/* immagine del pokemon */}
               <img src={pokemon.sprites?.front_default} alt='Pokemon'/>
+              
               <br/>
+              
               {/* bottone che porta alla pagina home */}
               <button><Link href={`/`}>home</Link></button>
             </div>
@@ -80,7 +81,6 @@ export default function Single( props ) {
 
 //dobbiamo ricreare il processo di call api, lo facciamo in una funzione esterna che poi richiamiamo
 export async function getServerSideProps({ query }) {
-  console.log('Questo lo sto consolloggando:', query);
   const term = query.slug;
   const API_URL = `https://pokeapi.co/api/v2/pokemon/${term ? term : null}`;
   // https://pokeapi.co/api/v2/pokemon/{id o nome}/
