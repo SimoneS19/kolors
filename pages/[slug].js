@@ -46,7 +46,7 @@ export default function Single( props ) {
       <div className="contenitorimg">
         <img
           className="immagine"
-          src='/images/artl.svg'
+          src='/images/mate.png'
         />
       </div>
 

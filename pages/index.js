@@ -15,7 +15,12 @@ export default function App( props ) {
   console.log('Stampa di props:', props)
 
   /* 2 */
-  // pokemonList è un array, setPokemonList utilizzato per inserire nuovi elementi nell'array, props.pokemonHome lo mettiamo tra le parentesi di useState perchè dobbiamo settare il valore iniziale dello stato
+  /*  pokemonList è un array, setPokemonList utilizzato per inserire
+      nuovi elementi nell'array, props.pokemonHome lo mettiamo tra le
+      parentesi di useState perchè dobbiamo settare il valore iniziale
+      dello stato
+  */
+ 
   const [pokemonList, setPokemonList] = useState(props.pokemonHome);
 
   /* LO SALTA PER FARLO DOPO -> 6 (CALLBACK CON SearcBar) */
@@ -29,7 +34,7 @@ export default function App( props ) {
     <div>
       {/* immagine artCode */}
       <div className="contenitorimg">
-        <img className="immagine" src='/images/artl.svg' />
+        <img className="immagine" src='/images/mate.png' />
       </div>
       
       {/* 5 -> BARRA DI RICERCA */}
@@ -44,14 +49,17 @@ export default function App( props ) {
         */}
 
         {/* 4 -> SPAMPA DEI 12 POKEMON */}{/* 6 -> QUESTA MAPPATURA VIENE CHIAMATA ANCORA CON LA SearchBAr -> PORTA A NUOVA PAGINA -> SLUG */}
-        {pokemonList.map((pokemon) => (
-          <div className="pokemon">
+        {pokemonList.map((pokemon, index) => (
+          //messo qua key perchè è il contenitore ci tutto il pokemon
+          <div key={index} className="pokemon">
             {/* nome */}
-            <div className="name-poke">{pokemon.name}</div>
+            <div className="name-poke"><h1>{pokemon.name}</h1></div>
             {/* immagine */}
-            <img src={pokemon.sprites?.front_default} />
+            {pokemon.sprites ? (
+              <img src={pokemon.sprites?.front_default} />
+            ): null}
             {/* pagina per pokemon */}
-            <button>
+            <button className="buttonName">
               <Link
                 href={{
                   pathname: `/${pokemon.name}`
@@ -71,10 +79,11 @@ export default function App( props ) {
 // Funzione per ottenere dati durante l'esecuzione del server
 export async function getServerSideProps() {
   //chiamata api -> con limite 12 -> quindi 12 elementi
-  const API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=12';
+  const API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=12&offset=0';
   const response = await axios.get(API_URL);
   //pendiamo elementi oggetto
   const pokemonHome = response.data.results;
+  console.log('ANCORSS', response.data);
   //props.pokemonHome
   return { props: { pokemonHome } };
 }
